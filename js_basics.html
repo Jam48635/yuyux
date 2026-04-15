@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基础知识练习</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        .output {
+            background: #f8f8f8;
+            padding: 10px;
+            border-left: 4px solid #4CAF50;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript 基础知识练习</h1>
+    
+    <div class="section">
+        <h2>1. 变量的定义</h2>
+        <p>练习使用 var、let 和 const 定义变量</p>
+        <button onclick="demoVariables()">运行变量练习</button>
+        <div id="varOutput" class="output">点击按钮查看结果...</div>
+    </div>
+
+    <div class="section">
+        <h2>2. 变量类型</h2>
+        <p>了解 JavaScript 中的基本数据类型</p>
+        <button onclick="demoTypes()">运行类型练习</button>
+        <div id="typeOutput" class="output">点击按钮查看结果...</div>
+    </div>
+
+    <div class="section">
+        <h2>3. 表达式</h2>
+        <p>算术表达式、比较表达式和逻辑表达式</p>
+        <button onclick="demoExpressions()">运行表达式练习</button>
+        <div id="exprOutput" class="output">点击按钮查看结果...</div>
+    </div>
+
+    <div class="section">
+        <h2>4. 流程控制</h2>
+        <p>条件语句和循环语句</p>
+        <button onclick="demoControlFlow()">运行流程控制练习</button>
+        <div id="flowOutput" class="output">点击按钮查看结果...</div>
+    </div>
+
+    <div class="section">
+        <h2>5. 函数</h2>
+        <p>函数声明、函数表达式和箭头函数</p>
+        <button onclick="demoFunctions()">运行函数练习</button>
+        <div id="funcOutput" class="output">点击按钮查看结果...</div>
+    </div>
+
+    <script>
+        // ==================== 1. 变量的定义 ====================
+        function demoVariables() {
+            let output = "";
+            
+            // var 声明的变量可以重复声明，存在变量提升
+            var name = "张三";
+            var name = "李四";  // 不会报错
+            output += "var name = " + name + "\n";
+            
+            // let 声明的变量具有块级作用域，不能重复声明
+            let age = 20;
+            // let age = 21;  // 会报错
+            age = 21;  // 可以重新赋值
+            output += "let age = " + age + "\n";
+            
+            // const 声明常量，一旦赋值不能修改
+            const PI = 3.14159;
+            output += "const PI = " + PI + "\n";
+            
+            // 块级作用域示例
+            {
+                let blockVar = "我在块级作用域内";
+                output += "块级变量: " + blockVar + "\n";
+            }
+            // blockVar 在这里不可访问
+            output += "块级作用域外的 let 变量不可访问\n";
+            
+            document.getElementById("varOutput").textContent = output;
+            console.log("变量练习完成");
+        }
+
+        // ==================== 2. 变量类型 ====================
+        function demoTypes() {
+            let output = "";
+            
+            // 字符串类型
+            let str = "Hello, JavaScript!";
+            output += "字符串: " + str + " (类型: " + typeof str + ")\n";
+            
+            // 数字类型
+            let num = 42;
+            let floatNum = 3.14;
+            output += "整数: " + num + " (类型: " + typeof num + ")\n";
+            output += "浮点数: " + floatNum + " (类型: " + typeof floatNum + ")\n";
+            
+            // 布尔类型
+            let flag = true;
+            output += "布尔值: " + flag + " (类型: " + typeof flag + ")\n";
+            
+            // 数组类型（对象的一种）
+            let arr = ["苹果", "香蕉", "橙子"];
+            output += "数组: " + arr + " (类型: " + typeof arr + ")\n";
+            
+            // 对象类型
+            let person = {
+                name: "王五",
+                age: 25,
+                isStudent: false
+            };
+            output += "对象: " + JSON.stringify(person) + " (类型: " + typeof person + ")\n";
+            
+            // undefined 和 null
+            let undefinedVar;
+            let nullVar = null;
+            output += "undefined: " + undefinedVar + " (类型: " + typeof undefinedVar + ")\n";
+            output += "null: " + nullVar + " (类型: " + typeof nullVar + ")\n";
+            
+            document.getElementById("typeOutput").textContent = output;
+            console.log("类型练习完成");
+        }
+
+        // ==================== 3. 表达式 ====================
+        function demoExpressions() {
+            let output = "";
+            
+            // 算术表达式
+            let a = 10, b = 3;
+            output += "=== 算术表达式 ===\n";
+            output += a + " + " + b + " = " + (a + b) + "\n";
+            output += a + " - " + b + " = " + (a - b) + "\n";
+            output += a + " * " + b + " = " + (a * b) + "\n";
+            output += a + " / " + b + " = " + (a / b) + "\n";
+            output += a + " % " + b + " = " + (a % b) + "\n";
+            
+            // 比较表达式
+            output += "\n=== 比较表达式 ===\n";
+            output += a + " > " + b + " = " + (a > b) + "\n";
+            output += a + " === " + b + " = " + (a === b) + "\n";
+            output += a + " == \"10\" = " + (a == "10") + " ( loose equality )\n";
+            output += a + " === \"10\" = " + (a === "10") + " ( strict equality )\n";
+            
+            // 逻辑表达式
+            output += "\n=== 逻辑表达式 ===\n";
+            let x = true, y = false;
+            output += "true && false = " + (x && y) + "\n";
+            output += "true || false = " + (x || y) + "\n";
+            output += "!true = " + (!x) + "\n";
+            
+            document.getElementById("exprOutput").textContent = output;
+            console.log("表达式练习完成");
+        }
+
+        // ==================== 4. 流程控制 ====================
+        function demoControlFlow() {
+            let output = "";
+            let score = 85;
+            
+            // if-else 语句
+            output += "=== if-else 判断 ===\n";
+            output += "成绩: " + score + "\n";
+            if (score >= 90) {
+                output += "等级: 优秀\n";
+            } else if (score >= 80) {
+                output += "等级: 良好\n";
+            } else if (score >= 60) {
+                output += "等级: 及格\n";
+            } else {
+                output += "等级: 不及格\n";
+            }
+            
+            // switch 语句
+            output += "\n=== switch 判断 ===\n";
+            let day = new Date().getDay();
+            switch(day) {
+                case 0: output += "今天是星期日\n"; break;
+                case 1: output += "今天是星期一\n"; break;
+                case 2: output += "今天是星期二\n"; break;
+                case 3: output += "今天是星期三\n"; break;
+                case 4: output += "今天是星期四\n"; break;
+                case 5: output += "今天是星期五\n"; break;
+                case 6: output += "今天是星期六\n"; break;
+                default: output += "未知日期\n";
+            }
+            
+            // for 循环
+            output += "\n=== for 循环 ===\n";
+            output += "1到5的累加: ";
+            let sum = 0;
+            for (let i = 1; i <= 5; i++) {
+                sum += i;
+                output += i;
+                if (i < 5) output += " + ";
+            }
+            output += " = " + sum + "\n";
+            
+            // while 循环
+            output += "\n=== while 循环 ===\n";
+            output += "5的阶乘: ";
+            let n = 5, factorial = 1, j = 1;
+            while (j <= n) {
+                factorial *= j;
+                output += j;
+                if (j < n) output += " × ";
+                j++;
+            }
+            output += " = " + factorial + "\n";
+            
+            document.getElementById("flowOutput").textContent = output;
+            console.log("流程控制练习完成");
+        }
+
+        // ==================== 5. 函数 ====================
+        function demoFunctions() {
+            let output = "";
+            
+            // 函数声明
+            function add(a, b) {
+                return a + b;
+            }
+            output += "=== 函数声明 ===\n";
+            output += "add(3, 5) = " + add(3, 5) + "\n";
+            
+            // 函数表达式
+            const multiply = function(a, b) {
+                return a * b;
+            };
+            output += "\n=== 函数表达式 ===\n";
+            output += "multiply(4, 6) = " + multiply(4, 6) + "\n";
+            
+            // 箭头函数
+            const square = (x) => x * x;
+            const greet = (name) => {
+                return "你好, " + name + "!";
+            };
+            output += "\n=== 箭头函数 ===\n";
+            output += "square(7) = " + square(7) + "\n";
+            output += "greet(\"张三\") = " + greet("张三") + "\n";
+            
+            // 带有默认参数的函数
+            function power(base, exponent = 2) {
+                return Math.pow(base, exponent);
+            }
+            output += "\n=== 默认参数 ===\n";
+            output += "power(3) = " + power(3) + " (默认平方)\n";
+            output += "power(2, 3) = " + power(2, 3) + " (立方)\n";
+            
+            // 递归函数
+            function fibonacci(n) {
+                if (n <= 1) return n;
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
+            output += "\n=== 递归函数 ===\n";
+            output += "斐波那契数列前8项: ";
+            for (let i = 0; i < 8; i++) {
+                output += fibonacci(i);
+                if (i < 7) output += ", ";
+            }
+            output += "\n";
+            
+            document.getElementById("funcOutput").textContent = output;
+            console.log("函数练习完成");
+        }
+
+        // 页面加载完成后自动运行一次所有演示
+        window.onload = function() {
+            demoVariables();
+            demoTypes();
+            demoExpressions();
+            demoControlFlow();
+            demoFunctions();
+        };
+    </script>
+</body>
+</html>
